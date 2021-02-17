@@ -11,6 +11,7 @@ export default function Image(props) {
             .then(res => {
                 setImgData(res.data)
             })
+            .catch(err => console.log('There is an error with the Axios get'))
     }, [date]) //only render when date changes
 
     return (
