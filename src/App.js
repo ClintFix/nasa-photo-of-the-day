@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <h1>Nasa Image of the Day</h1>
-      <DateDropdown setDate={setDate}/>
+      <DateDropdown date = {date} setDate={setDate}/>
       <Image date={date} />
     </div>
   );
