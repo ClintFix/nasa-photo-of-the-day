@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import Image from './components/image'
+
+let todaysDate = new Date().toISOString().slice(0, 10) // today's date in format YYYY-MM-DD (same as nasa data)
+
 
 function App() {
+
+  const [date, setDate] = useState(todaysDate); //set current date to today's date
+
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role="img" aria-label='go!'>🚀</span>!
-      </p>
+      <h1>Nasa Image of the Day</h1>
+      <Image date={date} />
     </div>
   );
 }
