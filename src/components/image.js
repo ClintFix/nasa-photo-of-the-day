@@ -1,5 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
+import styled from 'styled-components'
+
+const ImgContainer = styled.div`
+    width: 80%;
+    margin: 0 auto;
+`
+
+const ImgDiv = styled.div `
+    img {
+        &:hover {
+            border: 1px solid lightgray;
+            box-shadow: 5px 5px 5px lightgray;
+        }
+    }
+    
+`
+
+const DateCopyRight = styled.div `
+    color: ${props => props.theme.secondaryColor};
+    font-size: 0.8rem;
+    font-weight: bold;
+`
+
+const Description = styled.p `
+    width: 90%;
+    margin: 0 auto;
+    line-height: 1.5;
+    &:hover {
+        color: red;
+    }
+    padding-bottom: 20%;
+`
 
 
 export default function Image(props) {
@@ -10,27 +42,27 @@ export default function Image(props) {
         Axios.get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`)
             .then(res => {
                 setImgData(res.data)
-                debugger
+                
             })
             .catch(err => {
                 console.log('There is an error with the Axios get')
-                debugger
+                
             })
     }, [date]) //only render when date changes
 
     return (
-        <div className='imgContainer'>
+        <ImgContainer>
             <h2>{imgData.title}</h2>
-            <div>
+            <ImgDiv>
                 {
                     imgData.media_type === 'video' ? <iframe width="420" height="315" src={imgData.url}></iframe> : <img src = {imgData.url}></img> 
                 }
-            </div>
-            <div className='dateCopyright'>
+            </ImgDiv>
+            <DateCopyRight>
                 <p>{imgData.date} · ©{imgData.copyright}</p>
-            </div>
+            </DateCopyRight>
             <h2>Description</h2>
-            <p>{imgData.explanation}</p>
-        </div>
+            <Description>{imgData.explanation}</Description>
+        </ImgContainer>
     )
 }
